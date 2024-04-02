@@ -1,4 +1,10 @@
-const Home = ()=><h1>Home Section</h1>
+const Home = ()=>{
+    
+
+    return(
+        <h1>Home Section</h1>
+    )
+}
 
 
 
