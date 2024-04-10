@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookies'
 import "./index.css";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+  const token = Cookies.getItem("jwtToken");
 
   /*
       For single variable we can use below mentioned syntax of useState
@@ -41,6 +46,8 @@ const Login = () => {
         console.log(fetchData)
         if(response.ok===true){
           setValues({...allValues,showErrorMsg:false});
+          Cookies.setItem("jwtToken",fetchData.jwt_token)
+          navigate("/");
         }
         else{
           setValues({...allValues,showErrorMsg:true,errorMsg:fetchData.errorMsg});
@@ -57,7 +64,11 @@ const Login = () => {
       setValues({...allValues,password:event.target.value})
     }
 
-
+    useEffect(()=>{
+      if(token!==null){
+          navigate("/");
+      }
+    },[])
 
   return (
     <div className="login-cont container-fluid">
