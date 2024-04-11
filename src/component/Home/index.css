@@ -1,0 +1,13 @@
+.home-cont{
+    width: 100%;
+    height: 100vh;
+    background-image: url("https://assets.ccbp.in/frontend/react-js/home-lg-bg.png");
+    background-size: cover;
+}
+.home-content-cont{
+    width: 400px;
+    position: relative;
+    top: 100px;
+    left: 200px;
+    color: white;
+}

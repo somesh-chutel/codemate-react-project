@@ -1,0 +1,16 @@
+.filter-jobs-section{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    background-color: black;
+}
+.all-jobs-cont{
+    width: 35%;
+    height: 100%;
+    border: 1px solid white;
+}
+.filter-cont{
+    width: 65%;
+    height: 100%;
+    border: 1px solid white;
+}
