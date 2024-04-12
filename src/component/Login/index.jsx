@@ -26,7 +26,7 @@ const Login = () => {
         event.preventDefault();
 
 
-        const url = "http://localhost:3001/login";
+        const url = "https://apis.ccbp.in/login";
 
         const userDetails = {
           username: allValues.username,
@@ -34,11 +34,8 @@ const Login = () => {
         }
 
         const options = {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body : JSON.stringify(userDetails)
+          method: 'POST',
+          body: JSON.stringify(userDetails),
         }
 
         const response = await fetch(url,options);

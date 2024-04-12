@@ -1,0 +1,21 @@
+.jobs-card{
+    list-style: none;
+    width: 100%;
+    background-color: rgb(48, 46, 51);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    color: white;
+}
+.jobs-logo{
+    width: 70px;
+    margin-right: 10px;
+}
+.rating-icon{
+    color: yellow;
+    margin-right: 8px;
+}
+.l-icon{
+    margin-right: 5px;
+    margin-left: 10px;
+}
