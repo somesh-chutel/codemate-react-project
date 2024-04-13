@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookies";
 import Header from "../Header";
 import DisplayAllJobs from "../DisplayAllJobs";
+import JobsFilterSection from "../FilterSection";
 import "./index.css";
 
 const Jobs = () => {
   const [allValues,setValues] = useState({
-    jobsList:[]
+    jobsList:[],
+    empType:[],
+    minPakage:"",
+    searchinput:""
   });
 
   const token =
@@ -14,7 +18,7 @@ const Jobs = () => {
 
   useEffect(() => {
     const fetchJobsData = async () => {
-      const url = "https://apis.ccbp.in/jobs";
+      const url = `https://apis.ccbp.in/jobs?employment_type=${allValues.empType}&minimum_package=${allValues.minPakage}&search=${allValues.searchinput}`;
       const options = {
         method: "GET",
         headers: {
@@ -31,17 +35,27 @@ const Jobs = () => {
     };
 
     fetchJobsData();
-  }, []);
+  }, [allValues.searchinput,allValues.empType]);
+
+  const onChangesearchInput = (event)=>{
+      setValues({...allValues,searchinput:event.target.value});
+  }
+
+  const onChangeEmptype = (value,isChecked)=>{
+    console.log(isChecked)
+      setValues({...allValues,empType:value});
+
+  }
 
   return (
     <>
       <Header />
       <div className="filter-jobs-section">
-        <div className="all-jobs-cont">
-            <h1>Filter Section</h1>
+        <div className="all-jobs-cont mt-5">
+            <JobsFilterSection empFunction={onChangeEmptype}/>
         </div>
         <div className="filter-cont">
-            <input type="search" className="form-control w-75 m-3" placeholder="Search Jobs"/>
+            <input onChange={onChangesearchInput} type="search" className="form-control w-75 m-3" placeholder="Search Jobs"/>
             <ul>
               {allValues.jobsList.map(each=>
                 <DisplayAllJobs allJobs={each} key={each.id}/>
