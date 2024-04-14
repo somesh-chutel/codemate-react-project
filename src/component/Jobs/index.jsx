@@ -5,6 +5,7 @@ import DisplayAllJobs from "../DisplayAllJobs";
 import JobsFilterSection from "../FilterSection";
 import "./index.css";
 
+
 const Jobs = () => {
   const [allValues,setValues] = useState({
     jobsList:[],
@@ -38,12 +39,19 @@ const Jobs = () => {
   }, [allValues.searchinput,allValues.empType]);
 
   const onChangesearchInput = (event)=>{
-      setValues({...allValues,searchinput:event.target.value});
+      if(event.key==="Enter"){
+        setValues({...allValues,searchinput:event.target.value});
+      }
+      
   }
 
   const onChangeEmptype = (value,isChecked)=>{
-    console.log(isChecked)
-      setValues({...allValues,empType:value});
+      if(isChecked===true){
+          setValues({...allValues,empType:[...allValues.empType,value]});//-->["fulltime"]---->"fulltime",value--->["fulltime",value,value2,value3]
+      }
+      else{
+          setValues({...allValues,empType:allValues.empType.filter((each)=>each!==value)});
+      }
 
   }
 
@@ -55,7 +63,7 @@ const Jobs = () => {
             <JobsFilterSection empFunction={onChangeEmptype}/>
         </div>
         <div className="filter-cont">
-            <input onChange={onChangesearchInput} type="search" className="form-control w-75 m-3" placeholder="Search Jobs"/>
+            <input onKeyDown={onChangesearchInput} type="search" className="form-control w-75 m-3" placeholder="Search Jobs"/>
             <ul>
               {allValues.jobsList.map(each=>
                 <DisplayAllJobs allJobs={each} key={each.id}/>
